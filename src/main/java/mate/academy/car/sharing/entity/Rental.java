@@ -1,9 +1,12 @@
 package mate.academy.car.sharing.entity;
 
 import java.time.LocalDate;
-import javax.persistence.*;
 import javax.persistence.Entity;
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,10 +20,10 @@ public class Rental {
     private LocalDate rentalDate;
     private LocalDate returnDate;
     private LocalDate actualReturnDate;
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "car_id")
     private Car car;
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 }
