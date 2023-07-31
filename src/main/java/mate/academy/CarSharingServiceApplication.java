@@ -1,4 +1,4 @@
-package mate.academy.car.sharing;
+package mate.academy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
