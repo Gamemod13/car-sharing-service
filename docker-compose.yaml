@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  mysql:
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+
+  api:
+    //
