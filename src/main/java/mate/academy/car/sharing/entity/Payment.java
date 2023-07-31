@@ -8,7 +8,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 public class Payment {
     @Enumerated(EnumType.STRING)
@@ -21,54 +25,6 @@ public class Payment {
     private URL sessionUrl;
     private String sessionId;
     private BigDecimal amountToPay;
-
-    public PaymentStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(PaymentStatus status) {
-        this.status = status;
-    }
-
-    public PaymentType getPaymentType() {
-        return type;
-    }
-
-    public void setPaymentType(PaymentType paymentType) {
-        this.type = paymentType;
-    }
-
-    public Long getRentalId() {
-        return rentalId;
-    }
-
-    public void setRentalId(Long rentalId) {
-        this.rentalId = rentalId;
-    }
-
-    public URL getSessionUrl() {
-        return sessionUrl;
-    }
-
-    public void setSessionUrl(URL sessionUrl) {
-        this.sessionUrl = sessionUrl;
-    }
-
-    public String getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
-    }
-
-    public BigDecimal getAmountToPay() {
-        return amountToPay;
-    }
-
-    public void setAmountToPay(BigDecimal amountToPay) {
-        this.amountToPay = amountToPay;
-    }
 
     public enum PaymentStatus {
         PENDING, PAID
