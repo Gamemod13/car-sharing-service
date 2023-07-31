@@ -24,7 +24,6 @@ public class User {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
-    private Long chatId;
 
     public enum Role {
         MANAGER,
