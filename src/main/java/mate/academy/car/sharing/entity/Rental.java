@@ -19,8 +19,8 @@ public class Rental {
     private LocalDate actualReturnDate;
     @OneToMany
     @JoinColumn(name = "car_id")
-    private Car carId;
+    private Car car;
     @OneToMany
     @JoinColumn(name = "user_id")
-    private User userId;
+    private User user;
 }
