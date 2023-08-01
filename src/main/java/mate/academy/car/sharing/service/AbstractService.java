@@ -11,6 +11,6 @@ public interface AbstractService<T> {
     List<T> getAll();
 
     void delete(Long id);
-
-     User update(User user);
+    
+    User update(User user);
 }
