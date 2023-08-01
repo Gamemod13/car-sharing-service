@@ -20,6 +20,7 @@
             checkstyle/checkstyle.xml
         </maven.checkstyle.plugin.configLocation>
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+        <springfox.swagger2.version>3.0.0</springfox.swagger2.version>
     </properties>
     <dependencies>
         <dependency>
@@ -90,6 +91,27 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>0.9.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox.swagger2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox.swagger2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-spring-web</artifactId>
+            <version>${springfox.swagger2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots</artifactId>
+            <version>5.5.0</version>
         </dependency>
     </dependencies>
 
