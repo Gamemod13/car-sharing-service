@@ -1,5 +1,6 @@
 package mate.academy;
 
+import mate.academy.car.sharing.dto.request.UserRequestDto;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
