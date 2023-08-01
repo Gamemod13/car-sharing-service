@@ -1,14 +1,15 @@
 --liquibase formatted sql
---changeset igor_maks:create-table-users splitStatements:true endDelimeter: ;
+--changeset igor_maks:create-table-users splitStatements:true endDelimiter: ;
 
 CREATE TABLE IF NOT EXISTS `payments`  (
                          `id` BIGINT(0) UNSIGNED NOT NULL AUTO_INCREMENT,
                          `status` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
                          `type` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-						`rental_id` BIGINT unsigned NOT NULL,
+						 `rental_id` BIGINT unsigned NOT NULL,
                          `session_url` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
                          `session_id` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-                         `suma` DECIMAL(5, 2) UNSIGNED NOT NULL,
-                         `is_deleted` BIT(1) NOT NULL DEFAULT b'0',
-                         PRIMARY KEY (`id`) USING BTREE
+                         `amount_to_pay` DECIMAL(5, 2) UNSIGNED NOT NULL,
+                         PRIMARY KEY (`id`) USING BTREE,
+    INDEX `FK_rental_id`(`rental_id`) USING BTREE,
+    CONSTRAINT `FK_rental_id` FOREIGN KEY (`rental_id`) REFERENCES `rentals` (`id`)
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;

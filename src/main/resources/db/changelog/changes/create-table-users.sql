@@ -7,7 +7,6 @@ CREATE TABLE IF NOT EXISTS `users`  (
                          `first_name` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
                          `last_name` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
                          `password` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-                         `role` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-                         `is_deleted` BIT(1) NOT NULL DEFAULT b'0',
+                         `role` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'CUSTOMER',
                          PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
