@@ -9,7 +9,5 @@ public interface AbstractService<T> {
 
     List<T> getAll();
 
-    T update (T entity);
-
     void delete(Long id);
 }

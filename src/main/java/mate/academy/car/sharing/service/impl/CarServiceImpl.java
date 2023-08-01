@@ -28,11 +28,6 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Car update(Car car) {
-        return carRepository.save(car);
-    }
-
-    @Override
     public void delete(Long id) {
         carRepository.deleteById(id);
     }

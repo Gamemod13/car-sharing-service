@@ -1,29 +1,16 @@
 package mate.academy.car.sharing.service.impl;
 
-import lombok.AllArgsConstructor;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import mate.academy.car.sharing.entity.User;
 import mate.academy.car.sharing.repository.UserRepository;
 import mate.academy.car.sharing.service.UserService;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-
-    @Override
-    public User update(User user) {
-        User userFromDb = userRepository.findById(user.getId()).orElseThrow(
-                () -> new RuntimeException("There is no user with this id"));
-        userFromDb.setEmail(user.getEmail());
-        userFromDb.setRole(user.getRole());
-        userFromDb.setFirstName(user.getFirstName());
-        userFromDb.setLastName(user.getLastName());
-        return userRepository.save(userFromDb);
-    }
 
     @Override
     public User add(User user) {
