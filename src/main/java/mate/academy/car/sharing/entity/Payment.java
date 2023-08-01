@@ -1,24 +1,22 @@
 package mate.academy.car.sharing.entity;
 
 import java.math.BigDecimal;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
 @EqualsAndHashCode
-@ToString
 @Entity
 @Table(name = "payments")
 public class Payment {
@@ -30,7 +28,7 @@ public class Payment {
     @Enumerated(EnumType.STRING)
     private PaymentType type;
     @OneToOne
-    @Column(name = "rental_id")
+    @JoinColumn(name = "rental_id")
     private Rental rental;
     private String sessionUrl;
     private String sessionId;
