@@ -1,6 +1,7 @@
 package mate.academy.car.sharing.service.impl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
 import mate.academy.car.sharing.entity.User;
 import mate.academy.car.sharing.repository.UserRepository;
@@ -19,7 +20,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getById(Long id) {
-        return userRepository.getReferenceById(id);
+        return userRepository.findById(id).
+                orElseThrow(() ->
+                        new NoSuchElementException("Can't find user by id: " + id));
     }
 
     @Override
