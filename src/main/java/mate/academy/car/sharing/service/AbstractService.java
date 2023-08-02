@@ -1,7 +1,6 @@
 package mate.academy.car.sharing.service;
 
 import java.util.List;
-import mate.academy.car.sharing.entity.User;
 
 public interface AbstractService<T> {
     T add(T entity);
@@ -11,6 +10,6 @@ public interface AbstractService<T> {
     List<T> getAll();
 
     void delete(Long id);
-    
+
     T update(T t);
 }
