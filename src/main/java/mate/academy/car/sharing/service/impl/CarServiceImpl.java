@@ -1,6 +1,7 @@
 package mate.academy.car.sharing.service.impl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
 import mate.academy.car.sharing.entity.Car;
 import mate.academy.car.sharing.repository.CarRepository;
@@ -19,8 +20,10 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car getById(Long id) {
-        return carRepository.findById(id)
-                .orElseThrow((() -> new RuntimeException("Can`t find car with id: " + id)));
+        return carRepository
+                .findById(id).
+                orElseThrow(() ->
+                        new NoSuchElementException("Can't find car by id: " + id));
     }
 
     @Override
