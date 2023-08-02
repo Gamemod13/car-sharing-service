@@ -3,7 +3,6 @@ package mate.academy.car.sharing.service.impl;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import mate.academy.car.sharing.entity.Rental;
-import mate.academy.car.sharing.entity.User;
 import mate.academy.car.sharing.repository.RentalRepository;
 import mate.academy.car.sharing.service.RentalService;
 import org.springframework.stereotype.Service;
