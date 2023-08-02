@@ -1,4 +1,4 @@
-package mate.academy.car.sharing.config;
+package mate.academy.car.sharing.config.security;
 
 import lombok.RequiredArgsConstructor;
 import mate.academy.car.sharing.security.jwt.JwtConfigurer;
@@ -27,18 +27,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     protected void configure(HttpSecurity http) throws Exception {
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin().permitAll()
-                .and()
-                .apply(new JwtConfigurer(jwtTokenProvider))
-                .and()
-                .httpBasic()
-                .and()
-                .csrf().disable();
+//        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
+//                .authorizeRequests()
+//                .anyRequest().authenticated()
+//                .and()
+//                .formLogin().permitAll()
+//                .and()
+//                .apply(new JwtConfigurer(jwtTokenProvider))
+//                .and()
+//                .httpBasic()
+//                .and()
+//                .csrf().disable();
+        http.httpBasic().disable();
     }
 
     @Bean

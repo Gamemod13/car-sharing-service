@@ -3,7 +3,7 @@ package mate.academy.car.sharing.service.impl;
 import lombok.Getter;
 
 import mate.academy.car.sharing.exception.TelegramNotificationException;
-import mate.academy.car.sharing.service.NotificationService;
+import mate.academy.car.sharing.service.TelegramNotificationService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 @Getter
 @Service
 @PropertySource("classpath:application.properties")
-public class NotificationServiceImpl extends NotificationService {
+public class TelegramNotificationServiceImpl extends TelegramNotificationService {
     private static final String STARTED = "Started";
     @Value("${telegram.bot.username}")
     private String botUsername;

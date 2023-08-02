@@ -25,3 +25,53 @@ Example
 * Please provide a descriptive messages
 Example: ```Added implementation of UserController with all required methods```
 * Use rebase
+
+### DAO/DTO/Service/Controller examples:
+
+* Please, sure that you make your implementation consistently by other code:
+* Examples DAO:
+```agsl
+
+public interface UserRepository 
+extends JpaRepository<User, Long>{
+  Optional<User> findByEmail(String email);
+ } 
+```
+* Examples DTO:
+```agsl
+
+@Data
+public class UserResponseDto {
+    private String email;
+    private String firstName;
+    private String lastName;
+    private String role;
+}
+```
+* Examples Controller:
+```agsl
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/users")
+public class UserController {
+    private final UserService userService;
+    private final UserMapper mapper;
+
+    @GetMapping("/me")
+    public UserResponseDto get(Authentication auth) {
+       ...
+    }
+
+    @PutMapping("{id}/role")
+    public UserResponseDto updateRole(@PathVariable Long id, @RequestBody String role) {
+        ...
+    }
+
+    @PutMapping("/me")
+    public UserResponseDto updateUser(Authentication auth, @RequestBody UserRequestDto dto) {
+        ...
+    }
+}
+
+```
