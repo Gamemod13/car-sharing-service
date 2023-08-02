@@ -1,11 +1,9 @@
 package mate.academy.car.sharing.dto.response;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import java.math.BigDecimal;
 
-@Getter
-@Setter
+@Data
 public class CarResponseDto {
     private Long id;
     private String model;
