@@ -1,7 +1,6 @@
 package mate.academy.car.sharing.service.impl;
 
 import lombok.Getter;
-
 import mate.academy.car.sharing.exception.TelegramNotificationException;
 import mate.academy.car.sharing.service.TelegramNotificationService;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,20 +38,21 @@ public class TelegramNotificationServiceImpl extends TelegramNotificationService
     @Override
     public void onUpdateReceived(Update update) {
         System.out.println("update");
-        if(update.hasMessage() && update.getMessage().hasText()){
+        if (update.hasMessage() && update.getMessage().hasText()) {
             String messageText = update.getMessage().getText();
             String chatId = String.valueOf(update.getMessage().getChatId());
-            if(messageText.equals("/start")){
+            if (messageText.equals("/start")) {
                 sendMessage(chatId, STARTED);
             }
         }
     }
+
     @Override
     public void registerBot() {
         try {
             TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
             telegramBotsApi.registerBot(this);
-        } catch (TelegramApiException e){
+        } catch (TelegramApiException e) {
             throw new TelegramNotificationException("Can't register bot");
         }
     }
