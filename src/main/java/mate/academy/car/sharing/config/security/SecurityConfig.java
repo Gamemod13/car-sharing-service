@@ -35,17 +35,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers().permitAll()
-                .antMatchers("/register", "/inject", "/login", "/health", "/v2/api-docs",
-                        "/swagger-resources/**", "/swagger-ui.html", "/webjars/**")
-                .permitAll()
+                .antMatchers("/register", "/health", "/v2/api-docs",
+                        "/swagger-resources/**", "/swagger-ui.html", "/webjars/**").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/cars/*", "/users/*")
                 .hasRole(User.Role.MANAGER.name())
                 .anyRequest().authenticated()
                 .and()
-                .apply(new JwtConfigurer(jwtTokenProvider));
-
-        http.addFilterBefore(new JwtTokenFilter(jwtTokenProvider),
-                UsernamePasswordAuthenticationFilter.class);
+                .formLogin().permitAll()
+                .and()
+                .apply(new JwtConfigurer(jwtTokenProvider))
+                .and()
+                .addFilterBefore(new JwtTokenFilter(jwtTokenProvider),
+                        UsernamePasswordAuthenticationFilter.class)
+                .httpBasic().disable()
+                .csrf().disable();
     }
 
     @Bean
