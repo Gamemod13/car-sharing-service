@@ -31,3 +31,7 @@ public class Rental {
     @JoinColumn(name = "user_id")
     private User user;
 }
+
+
+
+
