@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
 import mate.academy.car.sharing.entity.Car;
+import mate.academy.car.sharing.entity.User;
 import mate.academy.car.sharing.repository.CarRepository;
 import mate.academy.car.sharing.service.CarService;
 import org.springframework.stereotype.Service;
@@ -34,5 +35,11 @@ public class CarServiceImpl implements CarService {
     @Override
     public void delete(Long id) {
         carRepository.deleteById(id);
+    }
+
+    @Override
+    public Car update(Car car) {
+        //TODO:Check/Update
+        return carRepository.save(car);
     }
 }

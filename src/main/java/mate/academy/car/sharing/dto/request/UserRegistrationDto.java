@@ -1,10 +1,8 @@
 package mate.academy.car.sharing.dto.request;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class UserRegistrationDto {
     private String email;
     private String password;

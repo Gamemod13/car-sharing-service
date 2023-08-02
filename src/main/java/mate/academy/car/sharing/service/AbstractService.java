@@ -12,5 +12,5 @@ public interface AbstractService<T> {
 
     void delete(Long id);
     
-    User update(User user);
+    T update(T t);
 }
