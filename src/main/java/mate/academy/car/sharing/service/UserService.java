@@ -4,5 +4,5 @@ import java.util.Optional;
 import mate.academy.car.sharing.entity.User;
 
 public interface UserService extends AbstractService<User> {
-    public Optional<User> findByEmail(String email);
+    Optional<User> findByEmail(String email);
 }
