@@ -13,10 +13,12 @@ import javax.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 @Getter
 @Setter
 @EqualsAndHashCode
+@Accessors(chain = true)
 @Entity
 @Table(name = "payments")
 public class Payment {
