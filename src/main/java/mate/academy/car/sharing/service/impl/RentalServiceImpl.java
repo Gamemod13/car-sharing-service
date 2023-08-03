@@ -39,11 +39,11 @@ public class RentalServiceImpl implements RentalService {
     }
 
     @Override
-    public List<Rental> getOverdueRentals(){
+    public List<Rental> getOverdueRentals() {
         return rentalRepository.getOverdueRentals();
     }
 
-    public Rental findActualRental(Long userId){
+    public Rental findActualRental(Long userId) {
         return rentalRepository.findActualRental(userId).orElseThrow();
     }
 }
