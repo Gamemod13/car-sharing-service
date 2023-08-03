@@ -3,7 +3,6 @@ package mate.academy.car.sharing.config.security;
 import lombok.RequiredArgsConstructor;
 import mate.academy.car.sharing.entity.User;
 import mate.academy.car.sharing.security.jwt.JwtConfigurer;
-import mate.academy.car.sharing.security.jwt.JwtTokenFilter;
 import mate.academy.car.sharing.security.jwt.JwtTokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +15,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -35,18 +33,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers().permitAll()
-                .antMatchers("/register", "/health", "/v2/api-docs",
+                .antMatchers("/register", "/login", "/health", "/v2/api-docs",
                         "/swagger-resources/**", "/swagger-ui.html", "/webjars/**").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/cars/*", "/users/*")
                 .hasRole(User.Role.MANAGER.name())
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().permitAll()
-                .and()
+//                .formLogin().permitAll()
+//                .and()
                 .apply(new JwtConfigurer(jwtTokenProvider))
                 .and()
-                .addFilterBefore(new JwtTokenFilter(jwtTokenProvider),
-                        UsernamePasswordAuthenticationFilter.class)
                 .httpBasic().disable()
                 .csrf().disable();
     }

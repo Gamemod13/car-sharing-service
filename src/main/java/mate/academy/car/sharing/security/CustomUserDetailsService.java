@@ -1,5 +1,7 @@
 package mate.academy.car.sharing.security;
 
+import static org.springframework.security.core.userdetails.User.withUsername;
+
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import mate.academy.car.sharing.entity.User;
@@ -21,13 +23,12 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found.");
         }
         User user = userOptional.get();
-        return org.springframework.security.core.userdetails.User
-                .withUsername(email)
+        return withUsername(email)
                 .password(user.getPassword())
                 .authorities(user.getAuthorities())
-                .accountExpired(user.isAccountNonExpired())
-                .accountLocked(user.isAccountNonLocked())
-                .credentialsExpired(user.isCredentialsNonExpired())
+                .accountExpired(!user.isAccountNonExpired())
+                .accountLocked(!user.isAccountNonLocked())
+                .credentialsExpired(!user.isCredentialsNonExpired())
                 .disabled(!user.isEnabled())
                 .build();
     }
