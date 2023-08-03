@@ -7,5 +7,4 @@ import mate.academy.car.sharing.entity.Payment;
 public class PaymentRequestDto {
     private Payment.PaymentType type;
     private Long rentalId;
-
 }

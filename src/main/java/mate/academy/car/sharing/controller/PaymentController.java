@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+//TODO: add swagger
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/payments")
@@ -40,13 +41,14 @@ public class PaymentController {
     }
 
     @GetMapping("/success")
-    public ResponseEntity<String> handleSuccessPayment(@RequestParam String sessionId) {
+    public ResponseEntity<String> handleSuccessPayment(
+            @RequestParam("session_id") String sessionId) {
         stripePaymentService.handleSuccessPayment(sessionId);
         return ResponseEntity.ok("Payment successful. Thank you!");
     }
 
     @GetMapping("/cancel")
-    public ResponseEntity<String> handleCancelPayment(@RequestParam String sessionId) {
+    public ResponseEntity<String> handleCancelPayment() {
         return ResponseEntity.ok("Payment canceled. Please try again later.");
     }
 }

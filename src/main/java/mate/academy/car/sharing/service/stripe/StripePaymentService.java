@@ -16,6 +16,7 @@ import mate.academy.car.sharing.service.RentalService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
+import static com.stripe.param.checkout.SessionCreateParams.LineItem.PriceData.ProductData.builder;
 
 @RequiredArgsConstructor
 @Service
@@ -35,17 +36,21 @@ public class StripePaymentService {
         payment.setRental(rental);
         SessionCreateParams.LineItem lineItem =
                 SessionCreateParams.LineItem.builder()
-                        .setPrice(String.valueOf(payment
-                                .getAmountToPay()
-                                .multiply(BigDecimal.valueOf(100))
-                                .intValue()))
+                        .setPriceData(SessionCreateParams.LineItem.PriceData.builder()
+                                .setCurrency("usd")
+                                .setUnitAmount(payment.getAmountToPay().longValue())
+                                .setProductData(builder()
+                                        .setName("Payment")
+                                        .setDescription("Test")
+                                        .build())
+                                .build()
+                        )
                         .setQuantity(1L)
                         .build();
         String successUrl = buildSuccessUrl();
         String cancelUrl = buildFailureUrl();
         SessionCreateParams params =
                 SessionCreateParams.builder()
-                        .setCurrency("USD")
                         .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
                         .setMode(SessionCreateParams.Mode.PAYMENT)
                         .setSuccessUrl(successUrl)
@@ -69,7 +74,7 @@ public class StripePaymentService {
             payment.setSessionUrl(session.getUrl());
             return paymentService.add(payment);
         } catch (StripeException e) {
-            throw new FailedSessionCreatingException("Can't create session");
+            throw new FailedSessionCreatingException("Can't create session", e);
         }
     }
 
@@ -89,7 +94,7 @@ public class StripePaymentService {
     private BigDecimal calculateAmountToPay(Rental rental) {
         BigDecimal rentalDays =
                 BigDecimal.valueOf(Duration
-                        .between(rental.getReturnDate(), rental.getRentalDate())
+                        .between(rental.getRentalDate(), rental.getReturnDate())
                         .toDays());
         BigDecimal amountToPay = rental.getCar().getDailyFee().multiply(rentalDays);
         return amountToPay;
