@@ -1,7 +1,6 @@
 package mate.academy.car.sharing.service.impl;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -66,8 +65,11 @@ public class RentalServiceImpl implements RentalService {
 
     @Override
     public List<Rental> getByUserAndStatus(Long userId, Boolean isActive) {
-        // TODO: implement this method
-        return Collections.emptyList();
+        if (isActive) {
+            return rentalRepository.findByUserIdAndActualReturnDateNull(userId);
+        } else {
+            return rentalRepository.findByUserIdAndActualReturnDateNotNull(userId);
+        }
     }
 
     @Override

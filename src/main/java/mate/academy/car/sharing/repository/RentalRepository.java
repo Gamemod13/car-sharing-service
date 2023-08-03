@@ -22,4 +22,8 @@ public interface RentalRepository extends JpaRepository<Rental, Long> {
                     + "LIMIT 1")
     Optional<Rental> findActualRental(@Param("userId") Long userId);
 
+    List<Rental> findByUserIdAndActualReturnDateNull(Long userId);
+
+    List<Rental> findByUserIdAndActualReturnDateNotNull(Long userId);
+
 }
