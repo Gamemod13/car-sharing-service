@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/cars")
@@ -38,7 +39,7 @@ public class CarController {
     }
 
     @PostMapping
-    public CarResponseDto add(@RequestBody CarRequestDto dto) {
+    public CarResponseDto add(@Valid @RequestBody CarRequestDto dto) {
         return carMapper.toDto(carService.add(carMapper.toEntity(dto)));
     }
 
@@ -49,7 +50,7 @@ public class CarController {
 
     @PutMapping("/{id}")
     public CarResponseDto updateCar(@PathVariable Long id,
-                                    @RequestBody CarRequestDto dto) {
+                                    @Valid @RequestBody CarRequestDto dto) {
         Car carFromDto = carMapper.toEntity(dto);
         carFromDto.setId(id);
         return carMapper.toDto(carService.update(carFromDto));

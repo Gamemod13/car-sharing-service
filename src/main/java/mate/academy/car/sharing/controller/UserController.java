@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
@@ -39,7 +40,7 @@ public class UserController {
 
     @Operation(summary = "Update current user", description = "Update current user")
     @PutMapping("/me")
-    public UserResponseDto updateUser(Authentication auth, @RequestBody UserRequestDto dto) {
+    public UserResponseDto updateUser(Authentication auth, @Valid @RequestBody UserRequestDto dto) {
         String email = auth.getName();
         return mapper.mapToDto(userService.updateProfileInfo(email, dto));
     }
