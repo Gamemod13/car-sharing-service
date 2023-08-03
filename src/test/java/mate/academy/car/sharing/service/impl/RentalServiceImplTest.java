@@ -10,6 +10,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import mate.academy.car.sharing.entity.Rental;
 import mate.academy.car.sharing.repository.RentalRepository;
+import mate.academy.car.sharing.service.CarService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -20,6 +21,8 @@ class RentalServiceImplTest {
 
     @Mock
     private RentalRepository rentalRepository;
+    @Mock
+    private CarService carService;
 
     @InjectMocks
     private RentalServiceImpl rentalService;
@@ -28,27 +31,26 @@ class RentalServiceImplTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
     }
-// TODO: fix this test;
 
-//    @Test
-//    void addRentalTest() {
-//        Rental rental = new Rental();
-//        rental.setId(1L);
-//        when(rentalRepository.save(rental)).thenReturn(rental);
-//        Rental addedRental = rentalService.add(rental);
-//        assertNotNull(addedRental);
-//        assertEquals(rental, addedRental);
-//    }
+    @Test
+    void addRentalTest() {
+        Rental rental = new Rental();
+        rental.setId(1L);
+        when(rentalRepository.save(rental)).thenReturn(rental);
+        Rental addedRental = rentalService.add(rental);
+        assertNotNull(addedRental);
+        assertEquals(rental, addedRental);
+    }
 
     @Test
     void getByIdExistingRentalTest() {
-//        Long rentalId = 1L;
-//        Rental rental = new Rental();
-//        rental.setId(rentalId);
-//        when(rentalRepository.getReferenceById(rentalId)).thenReturn(rental);
-//        Rental retrievedRental = rentalService.getById(rentalId);
-//        assertNotNull(retrievedRental);
-//        assertEquals(rental, retrievedRental);
+        Long rentalId = 1L;
+        Rental rental = new Rental();
+        rental.setId(rentalId);
+        when(rentalRepository.findById(rentalId)).thenReturn(Optional.of(rental));
+        Rental retrievedRental = rentalService.getById(rentalId);
+        assertNotNull(retrievedRental);
+        assertEquals(rental, retrievedRental);
     }
 
     @Test
