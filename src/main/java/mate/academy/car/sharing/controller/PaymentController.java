@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import javax.validation.Valid;
 
 //TODO: add swagger
 @RequiredArgsConstructor
@@ -35,7 +36,8 @@ public class PaymentController {
     }
 
     @PostMapping
-    public PaymentResponseDto createPaymentSession(@RequestBody PaymentRequestDto requestDto) {
+    public PaymentResponseDto createPaymentSession(@Valid @RequestBody
+                                                       PaymentRequestDto requestDto) {
         Payment payment = paymentMapper.toEntity(requestDto);
         return paymentMapper.toDto(stripePaymentService.createPaymentSession(payment));
     }
