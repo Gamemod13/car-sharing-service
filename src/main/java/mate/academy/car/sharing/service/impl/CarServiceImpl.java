@@ -52,6 +52,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    @Transactional
     public Car increaseInventory(Car car) {
         int newInventory = car.getInventory() + 1;
         car.setInventory(newInventory);
@@ -59,6 +60,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    @Transactional
     public Car decreaseInventory(Car car) {
         int newInventory = car.getInventory() - 1;
         car.setInventory(newInventory);
