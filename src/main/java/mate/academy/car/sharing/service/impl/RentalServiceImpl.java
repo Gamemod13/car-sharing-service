@@ -20,6 +20,7 @@ public class RentalServiceImpl implements RentalService {
     private final CarService carService;
 
     @Override
+    @Transactional
     public Rental add(Rental rental) {
         User user = rental.getUser();
         Car car = carService.decreaseInventory(rental.getCar());
