@@ -1,5 +1,3 @@
---liquibase formatted sql
---changeset igor_maks:create-table-users splitStatements:true endDelimeter: ;
 
 CREATE TABLE IF NOT EXISTS `users`  (
                          `id` BIGINT(0) UNSIGNED NOT NULL AUTO_INCREMENT,

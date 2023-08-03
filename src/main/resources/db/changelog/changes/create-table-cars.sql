@@ -1,5 +1,4 @@
---liquibase formatted sql
---changeset igor_maks:create-table-cars splitStatements:true endDelimiter: ;
+
 CREATE TABLE IF NOT EXISTS `cars`  (
                          `id` BIGINT(0) UNSIGNED NOT NULL AUTO_INCREMENT,
                          `model` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
