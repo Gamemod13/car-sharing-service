@@ -34,21 +34,13 @@ public class UserController {
     @Operation(summary = "Update user role", description = "Update user role")
     @PutMapping("{id}/role")
     public UserResponseDto updateRole(@PathVariable Long id, @RequestBody String role) {
-        User userFromDb = userService.getById(id);
-        userFromDb.setRole(User.Role.valueOf(role));
-        return mapper.mapToDto(userService.update(userFromDb));
+        return mapper.mapToDto(userService.updateUserRole(id, role));
     }
 
     @Operation(summary = "Update current user", description = "Update current user")
     @PutMapping("/me")
     public UserResponseDto updateUser(Authentication auth, @RequestBody UserRequestDto dto) {
         String email = auth.getName();
-        User userFromDb = userService.findByEmail(email).orElseThrow(
-                () -> new RuntimeException("User with email " + email + " not found"));
-        userFromDb.setEmail(dto.getEmail());
-        userFromDb.setPassword(dto.getPassword());
-        userFromDb.setLastName(dto.getLastName());
-        userFromDb.setFirstName(dto.getFirstName());
-        return mapper.mapToDto(userService.update(userFromDb));
+        return mapper.mapToDto(userService.updateProfileInfo(email, dto));
     }
 }
