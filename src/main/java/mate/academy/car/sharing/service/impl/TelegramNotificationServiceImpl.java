@@ -20,8 +20,6 @@ public class TelegramNotificationServiceImpl extends TelegramNotificationService
     private String botUsername;
     @Value("${telegram.bot.token}")
     private String botToken;
-    @Value("${telegram.chat.id}")
-    private String adminChatId;
 
     @Override
     public String getBotUsername() {
