@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import mate.academy.car.sharing.entity.User;
 import mate.academy.car.sharing.security.jwt.JwtConfigurer;
 import mate.academy.car.sharing.security.jwt.JwtTokenProvider;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,7 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
@@ -22,10 +20,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final JwtTokenProvider jwtTokenProvider;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(getEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
 
     protected void configure(HttpSecurity http) throws Exception {
@@ -39,16 +38,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .hasRole(User.Role.MANAGER.name())
                 .anyRequest().authenticated()
                 .and()
-//                .formLogin().permitAll()
-//                .and()
+                .formLogin().permitAll()
+                .and()
                 .apply(new JwtConfigurer(jwtTokenProvider))
                 .and()
                 .httpBasic().disable()
                 .csrf().disable();
-    }
-
-    @Bean
-    public PasswordEncoder getEncoder() {
-        return new BCryptPasswordEncoder();
     }
 }
