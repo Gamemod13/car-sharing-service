@@ -22,18 +22,14 @@ import org.springframework.http.ResponseEntity;
 
 @ExtendWith(MockitoExtension.class)
 public class PaymentControllerTest {
-
     @Mock
     private PaymentMapper paymentMapper;
-
     @Mock
     private PaymentService paymentService;
-
     @Mock
     private StripePaymentService stripePaymentService;
     @Mock
     private UserService userService;
-
     @InjectMocks
     private PaymentController paymentController;
 
