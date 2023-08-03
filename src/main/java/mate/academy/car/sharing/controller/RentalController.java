@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -30,11 +29,6 @@ public class RentalController {
                 .collect(Collectors.toList());
     }
 
-    @Operation(summary = "Get all rentals by user ID", description = "Get all rentals by user ID")
-    @GetMapping("/actual")
-    public List<Rental> getAllActual() {
-        return rentalService.getAllActual();
-    }
 
     @Operation(summary = "Get rental by ID", description = "Get rental by ID")
     @GetMapping("/{rentalId}")

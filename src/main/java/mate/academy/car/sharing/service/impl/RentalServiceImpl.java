@@ -24,11 +24,6 @@ public class RentalServiceImpl implements RentalService {
     }
 
     @Override
-    public List<Rental> getAllActual() {
-        return rentalRepository.findAllActual();
-    }
-
-    @Override
     public List<Rental> getAll() {
         return rentalRepository.findAll();
     }
