@@ -31,10 +31,9 @@ public class RentalController {
     }
 
     @Operation(summary = "Get all rentals by user ID", description = "Get all rentals by user ID")
-    @GetMapping("/user")
-    public List<RentalResponseDto> getByUserId(@RequestParam Long userId,
-                                               @RequestParam boolean isActive) {
-        return null;
+    @GetMapping("/actual")
+    public List<Rental> getAllActual() {
+        return rentalService.getAllActual();
     }
 
     @Operation(summary = "Get rental by ID", description = "Get rental by ID")

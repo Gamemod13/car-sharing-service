@@ -24,8 +24,8 @@ public class RentalServiceImpl implements RentalService {
     }
 
     @Override
-    public Optional<Rental> getByUserIdActual(Long userId) {
-        return null;
+    public List<Rental> getAllActual() {
+        return rentalRepository.findAllActual();
     }
 
     @Override
