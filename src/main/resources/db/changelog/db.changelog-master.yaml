@@ -7,5 +7,3 @@ databaseChangeLog:
       file: db/changelog/changes/create-table-rentals.sql
   - include:
       file: db/changelog/changes/create-table-payments.sql
-  - include:
-      file: db/changelog/changes/alter-table-rental-actual-NULL.sql

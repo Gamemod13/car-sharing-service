@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `rentals`  (
                          `id` BIGINT(0) UNSIGNED NOT NULL AUTO_INCREMENT,
 						 `rental_date` DATETIME NOT NULL,
 						 `return_date` DATETIME NOT NULL,
-						 `actual_return_date` DATETIME NOT NULL,
+						 `actual_return_date` DATETIME NULL,
 						 `car_id` BIGINT unsigned NOT NULL,
 						 `user_id` BIGINT unsigned NOT NULL,
                          PRIMARY KEY (`id`) USING BTREE,
