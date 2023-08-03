@@ -1,4 +1,4 @@
-
+--liquibase formatted sql
 CREATE TABLE IF NOT EXISTS `rentals`  (
                          `id` BIGINT(0) UNSIGNED NOT NULL AUTO_INCREMENT,
 						 `rental_date` DATETIME NOT NULL,
