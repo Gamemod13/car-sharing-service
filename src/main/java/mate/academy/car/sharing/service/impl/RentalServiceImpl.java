@@ -3,6 +3,8 @@ package mate.academy.car.sharing.service.impl;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
+
 import lombok.RequiredArgsConstructor;
 import mate.academy.car.sharing.entity.Car;
 import mate.academy.car.sharing.entity.Rental;
@@ -32,7 +34,9 @@ public class RentalServiceImpl implements RentalService {
 
     @Override
     public Rental getById(Long id) {
-        return rentalRepository.getReferenceById(id);
+        return rentalRepository.findById(id)
+                .orElseThrow(() ->
+                        new NoSuchElementException("Can't find rental by id: " + id));
     }
 
     @Override
