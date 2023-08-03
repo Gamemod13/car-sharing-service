@@ -23,6 +23,11 @@ public class RentalServiceImpl implements RentalService {
     }
 
     @Override
+    public List<Rental> getByUserIdActual(Long userId) {
+        return List.of();
+    }
+
+    @Override
     public List<Rental> getAll() {
         return rentalRepository.findAll();
     }
