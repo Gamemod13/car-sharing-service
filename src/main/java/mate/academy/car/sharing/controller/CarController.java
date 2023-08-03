@@ -1,6 +1,6 @@
 package mate.academy.car.sharing.controller;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import mate.academy.car.sharing.dto.request.CarRequestDto;
 import mate.academy.car.sharing.dto.response.CarResponseDto;
 import mate.academy.car.sharing.entity.Car;
@@ -20,12 +20,12 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/cars")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CarController {
     private final CarService carService;
     private final CarMapper carMapper;
 
-    @GetMapping("/all")
+    @GetMapping("/")
     public List<CarResponseDto> getAll() {
         return carService.getAll().stream()
                 .map(carMapper::toDto)
@@ -34,15 +34,12 @@ public class CarController {
 
     @GetMapping("/{id}")
     public CarResponseDto get(@PathVariable Long id) {
-        Car car = carService.getById(id);
-        return carMapper.toDto(car);
+        return carMapper.toDto(carService.getById(id));
     }
 
     @PostMapping
-    public CarResponseDto add(@RequestBody CarRequestDto carRequestDto) {
-        Car car = carMapper.toEntity(carRequestDto);
-        carService.add(car);
-        return carMapper.toDto(car);
+    public CarResponseDto add(@RequestBody CarRequestDto dto) {
+        return carMapper.toDto(carService.add(carMapper.toEntity(dto)));
     }
 
     @DeleteMapping("/{id}")
@@ -52,13 +49,9 @@ public class CarController {
 
     @PutMapping("/{id}")
     public CarResponseDto updateCar(@PathVariable Long id,
-                                    @RequestBody CarRequestDto carRequestDto) {
-        Car car = carService.getById(id);
-        car.setBrand(carRequestDto.getBrand());
-        car.setModel(carRequestDto.getModel());
-        car.setInventory(carRequestDto.getInventory());
-        car.setType(Car.CarType.valueOf(carRequestDto.getType()));
-        car.setDailyFee(carRequestDto.getDailyFee());
-        return carMapper.toDto(carService.update(car));
+                                    @RequestBody CarRequestDto dto) {
+        Car carFromDto = carMapper.toEntity(dto);
+        carFromDto.setId(id);
+        return carMapper.toDto(carService.update(carFromDto));
     }
 }
