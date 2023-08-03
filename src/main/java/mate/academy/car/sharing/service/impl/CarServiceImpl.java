@@ -41,4 +41,18 @@ public class CarServiceImpl implements CarService {
         //TODO:Check/Update
         return carRepository.save(car);
     }
+
+    @Override
+    public Car increaseInventory(Car car) {
+        int newInventory = car.getInventory() + 1;
+        car.setInventory(newInventory);
+        return update(car);
+    }
+
+    @Override
+    public Car decreaseInventory(Car car) {
+        int newInventory = car.getInventory() - 1;
+        car.setInventory(newInventory);
+        return update(car);
+    }
 }

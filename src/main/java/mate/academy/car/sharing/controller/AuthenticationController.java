@@ -10,9 +10,9 @@ import mate.academy.car.sharing.dto.request.UserRegistrationDto;
 import mate.academy.car.sharing.dto.response.UserResponseDto;
 import mate.academy.car.sharing.entity.User;
 import mate.academy.car.sharing.exception.AuthenticationException;
+import mate.academy.car.sharing.mapper.UserMapper;
 import mate.academy.car.sharing.security.AuthenticationService;
 import mate.academy.car.sharing.security.jwt.JwtTokenProvider;
-import mate.academy.car.sharing.service.mappers.UserMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,9 +28,8 @@ public class AuthenticationController {
 
     @Operation(summary = "Data for registration", description = "Data for registration")
     @PostMapping("/register")
-    public UserResponseDto register(@RequestBody UserRegistrationDto userRequestDto) {
-        User user = authenticationService.register(userRequestDto.getEmail(),
-                userRequestDto.getPassword());
+    public UserResponseDto register(@RequestBody UserRegistrationDto userRegistrationDto) {
+        User user = authenticationService.register(userMapper.mapToEntity(userRegistrationDto));
         return userMapper.mapToDto(user);
     }
 
@@ -39,7 +38,7 @@ public class AuthenticationController {
     public ResponseEntity<Object> login(@RequestBody UserLoginDto userLoginDto)
             throws AuthenticationException {
         User user =
-                authenticationService.login(userLoginDto.getLogin(), userLoginDto.getPassword());
+                authenticationService.login(userLoginDto.getEmail(), userLoginDto.getPassword());
         String token =
                 jwtTokenProvider.createToken(user.getEmail(), List.of(user.getRole().name()));
         return new ResponseEntity<>(Map.of("token", token), HttpStatus.OK);
