@@ -2,6 +2,7 @@ package mate.academy.car.sharing.service.impl;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import mate.academy.car.sharing.entity.Car;
 import mate.academy.car.sharing.repository.CarRepository;
@@ -37,9 +38,17 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    @Transactional
     public Car update(Car car) {
-        //TODO:Check/Update
-        return carRepository.save(car);
+        Car carFromDb = carRepository.findById(car.getId()).orElseThrow(
+                () -> new NoSuchElementException("Can't find car by id: " + car.getId()));
+        carFromDb.setId(car.getId());
+        carFromDb.setModel(car.getModel());
+        carFromDb.setBrand(car.getBrand());
+        carFromDb.setType(car.getType());
+        carFromDb.setInventory(car.getInventory());
+        carFromDb.setDailyFee(car.getDailyFee());
+        return carFromDb;
     }
 
     @Override

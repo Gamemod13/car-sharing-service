@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User updateProfileInfo(String email, UserRequestDto dto) {
         User userFromDb = userRepository.findByEmail(email).orElseThrow(
-                () -> new RuntimeException("Not found profile info for user with email: " + email));
+                () -> new NoSuchElementException("Not found profile info for user with email: " + email));
         userFromDb.setEmail(dto.getEmail());
         userFromDb.setFirstName(dto.getFirstName());
         userFromDb.setLastName(dto.getLastName());
