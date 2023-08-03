@@ -1,7 +1,11 @@
 package mate.academy.car.sharing.service.impl;
 
 import java.util.List;
+<<<<<<<<< Temporary merge branch 1
+import java.util.Optional;
+=========
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import mate.academy.car.sharing.entity.User;
 import mate.academy.car.sharing.repository.UserRepository;
@@ -20,8 +24,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getById(Long id) {
-        return userRepository.findById(id).
-                orElseThrow(() ->
+        return userRepository.findById(id)
+                .orElseThrow(() ->
                         new NoSuchElementException("Can't find user by id: " + id));
     }
 
@@ -33,5 +37,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public User update(User user) {
+        return userRepository.save(user);
     }
 }

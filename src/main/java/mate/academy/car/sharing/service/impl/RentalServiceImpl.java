@@ -31,4 +31,10 @@ public class RentalServiceImpl implements RentalService {
     public void delete(Long id) {
         rentalRepository.deleteById(id);
     }
+
+    @Override
+    public Rental update(Rental rental) {
+        //TODO:Check/Update
+        return rentalRepository.save(rental);
+    }
 }

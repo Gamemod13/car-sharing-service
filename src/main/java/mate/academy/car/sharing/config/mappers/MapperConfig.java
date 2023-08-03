@@ -1,4 +1,4 @@
-package mate.academy.car.sharing.config;
+package mate.academy.car.sharing.config.mappers;
 
 import org.mapstruct.NullValueCheckStrategy;
 

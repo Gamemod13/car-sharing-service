@@ -21,8 +21,8 @@ public class CarServiceImpl implements CarService {
     @Override
     public Car getById(Long id) {
         return carRepository
-                .findById(id).
-                orElseThrow(() ->
+                .findById(id)
+                .orElseThrow(() ->
                         new NoSuchElementException("Can't find car by id: " + id));
     }
 
@@ -34,5 +34,11 @@ public class CarServiceImpl implements CarService {
     @Override
     public void delete(Long id) {
         carRepository.deleteById(id);
+    }
+
+    @Override
+    public Car update(Car car) {
+        //TODO:Check/Update
+        return carRepository.save(car);
     }
 }
