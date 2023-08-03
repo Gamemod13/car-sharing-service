@@ -40,13 +40,13 @@ public class PaymentController {
     }
 
     @GetMapping("/success")
-    public ResponseEntity<String> handleSuccessPayment(@RequestParam String sessionId) {
+    public ResponseEntity<String> handleSuccessPayment(@RequestParam("session_id") String sessionId) {
         stripePaymentService.handleSuccessPayment(sessionId);
         return ResponseEntity.ok("Payment successful. Thank you!");
     }
 
     @GetMapping("/cancel")
-    public ResponseEntity<String> handleCancelPayment(@RequestParam String sessionId) {
+    public ResponseEntity<String> handleCancelPayment() {
         return ResponseEntity.ok("Payment canceled. Please try again later.");
     }
 }
