@@ -1,6 +1,6 @@
 package mate.academy.car.sharing.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,9 +21,9 @@ public class Rental {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate rentalDate;
-    private LocalDate returnDate;
-    private LocalDate actualReturnDate;
+    private LocalDateTime rentalDate;
+    private LocalDateTime returnDate;
+    private LocalDateTime actualReturnDate;
     @ManyToOne
     @JoinColumn(name = "car_id")
     private Car car;
