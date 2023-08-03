@@ -37,4 +37,13 @@ public class RentalServiceImpl implements RentalService {
         //TODO:Check/Update
         return rentalRepository.save(rental);
     }
+
+    @Override
+    public List<Rental> getOverdueRentals(){
+        return rentalRepository.getOverdueRentals();
+    }
+
+    public Rental findActualRental(Long userId){
+        return rentalRepository.findActualRental(userId).orElseThrow();
+    }
 }
