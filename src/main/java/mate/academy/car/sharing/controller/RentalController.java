@@ -34,10 +34,7 @@ public class RentalController {
     @GetMapping("/user")
     public List<RentalResponseDto> getByUserId(@RequestParam Long userId,
                                                @RequestParam boolean isActive) {
-
-        return rentalService.getAll().stream()
-                .map(mapper::mapToDto)
-                .collect(Collectors.toList());
+        return null;
     }
 
     @Operation(summary = "Get rental by ID", description = "Get rental by ID")

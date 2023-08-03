@@ -1,8 +1,9 @@
 package mate.academy.car.sharing.service;
 
 import java.util.List;
+import java.util.Optional;
 import mate.academy.car.sharing.entity.Rental;
 
 public interface RentalService extends AbstractService<Rental> {
-    List<Rental> getByUserIdActual(Long userId);
+    Optional<Rental> getByUserIdActual(Long userId);
 }

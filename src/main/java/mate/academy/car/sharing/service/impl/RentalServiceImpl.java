@@ -1,6 +1,7 @@
 package mate.academy.car.sharing.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import mate.academy.car.sharing.entity.Rental;
 import mate.academy.car.sharing.repository.RentalRepository;
@@ -23,8 +24,8 @@ public class RentalServiceImpl implements RentalService {
     }
 
     @Override
-    public List<Rental> getByUserIdActual(Long userId) {
-        return List.of();
+    public Optional<Rental> getByUserIdActual(Long userId) {
+        return null;
     }
 
     @Override
