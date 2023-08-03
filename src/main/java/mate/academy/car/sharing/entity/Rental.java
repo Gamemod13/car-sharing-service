@@ -30,4 +30,9 @@ public class Rental {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public boolean isActive() {
+        // TODO: can be used in getByUserAndStatus() in RentalController
+        return returnDate != null && returnDate.isAfter(LocalDateTime.now());
+    }
 }

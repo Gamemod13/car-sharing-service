@@ -21,9 +21,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car getById(Long id) {
-        return carRepository
-                .findById(id)
-                .orElseThrow(() ->
+        return carRepository.findById(id).orElseThrow(() ->
                         new NoSuchElementException("Can't find car by id: " + id));
     }
 
@@ -40,8 +38,8 @@ public class CarServiceImpl implements CarService {
     @Override
     @Transactional
     public Car update(Car car) {
-        Car carFromDb = carRepository.findById(car.getId()).orElseThrow(
-                () -> new NoSuchElementException("Can't find car by id: " + car.getId()));
+        Car carFromDb = carRepository.findById(car.getId()).orElseThrow(() ->
+                new NoSuchElementException("Can't find car by id: " + car.getId()));
         carFromDb.setId(car.getId());
         carFromDb.setModel(car.getModel());
         carFromDb.setBrand(car.getBrand());
@@ -52,6 +50,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    @Transactional
     public Car increaseInventory(Car car) {
         int newInventory = car.getInventory() + 1;
         car.setInventory(newInventory);
@@ -59,6 +58,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    @Transactional
     public Car decreaseInventory(Car car) {
         int newInventory = car.getInventory() - 1;
         car.setInventory(newInventory);
