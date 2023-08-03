@@ -34,8 +34,10 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody UserLoginDto userLoginDto)
             throws AuthenticationException {
-        User user = authenticationService.login(userLoginDto.getLogin(), userLoginDto.getPassword());
-        String token = jwtTokenProvider.createToken(user.getEmail(), List.of(user.getRole().name()));
+        User user = authenticationService.login(userLoginDto.getLogin(),
+                userLoginDto.getPassword());
+        String token = jwtTokenProvider.createToken(user.getEmail(),
+                List.of(user.getRole().name()));
         return new ResponseEntity<>(Map.of("token", token), HttpStatus.OK);
     }
 }
