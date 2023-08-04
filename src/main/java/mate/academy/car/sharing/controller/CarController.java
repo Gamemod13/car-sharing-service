@@ -1,5 +1,6 @@
 package mate.academy.car.sharing.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import mate.academy.car.sharing.dto.request.CarRequestDto;
 import mate.academy.car.sharing.dto.response.CarResponseDto;
@@ -26,6 +27,7 @@ public class CarController {
     private final CarService carService;
     private final CarMapper carMapper;
 
+    @Operation(summary = "Get all car", description = "List of all car")
     @GetMapping("/")
     public List<CarResponseDto> getAll() {
         return carService.getAll().stream()
@@ -33,21 +35,25 @@ public class CarController {
                 .collect(Collectors.toList());
     }
 
+    @Operation(summary = "Get car by id", description = "Get car by id")
     @GetMapping("/{id}")
     public CarResponseDto get(@PathVariable Long id) {
         return carMapper.toDto(carService.getById(id));
     }
 
+    @Operation(summary = "Add car", description = "Creation of the essence of the car")
     @PostMapping
     public CarResponseDto add(@Valid @RequestBody CarRequestDto dto) {
         return carMapper.toDto(carService.add(carMapper.toEntity(dto)));
     }
 
+    @Operation(summary = "Delete car by id", description = "Delete car by id")
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         carService.delete(id);
     }
 
+    @Operation(summary = "Update car by id", description = "Update car by id")
     @PutMapping("/{id}")
     public CarResponseDto updateCar(@PathVariable Long id,
                                     @Valid @RequestBody CarRequestDto dto) {
