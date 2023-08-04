@@ -1,5 +1,6 @@
 package mate.academy.car.sharing.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import mate.academy.car.sharing.dto.request.PaymentRequestDto;
 import mate.academy.car.sharing.dto.response.PaymentResponseDto;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
-//TODO: add swagger
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/payments")
@@ -30,6 +30,7 @@ public class PaymentController {
     private final PaymentMapper paymentMapper;
     private final TelegramNotificationService telegramNotificationService;
 
+    @Operation(summary = "Get payment by user id ", description = "Get payment by user id ")
     @GetMapping
     public PaymentResponseDto getByUserId(@RequestParam Long userId) {
         User user = userService.getById(userId);
@@ -37,6 +38,7 @@ public class PaymentController {
         return paymentMapper.toDto(payment);
     }
 
+    @Operation(summary = "Create payment", description = "Create payment")
     @PostMapping
     public PaymentResponseDto createPaymentSession(@Valid @RequestBody
                                                        PaymentRequestDto requestDto) {
@@ -44,6 +46,7 @@ public class PaymentController {
         return paymentMapper.toDto(stripePaymentService.createPaymentSession(payment));
     }
 
+    @Operation(summary = "Payment success page", description = "Payment success page")
     @GetMapping("/success")
     public ResponseEntity<String> handleSuccessPayment(
             @RequestParam("session_id") String sessionId) {
@@ -53,6 +56,7 @@ public class PaymentController {
         return ResponseEntity.ok("Payment successful. Thank you!");
     }
 
+    @Operation(summary = "Payment cancel page", description = "Payment cancel page")
     @GetMapping("/cancel")
     public ResponseEntity<String> handleCancelPayment() {
         return ResponseEntity.ok("Payment canceled. Please try again later.");
