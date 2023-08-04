@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HealthCheckController {
     @GetMapping("/health")
-    @Operation(summary = "Health check")
+    @Operation(summary = "Health controller", description = "Health controller")
     public String healthCheck() {
         return "OK";
     }

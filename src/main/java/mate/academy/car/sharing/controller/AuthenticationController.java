@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import javax.validation.Valid;
 
 @RequiredArgsConstructor
 @RestController
@@ -28,14 +29,14 @@ public class AuthenticationController {
 
     @Operation(summary = "Data for registration", description = "Data for registration")
     @PostMapping("/register")
-    public UserResponseDto register(@RequestBody UserRegistrationDto userRegistrationDto) {
+    public UserResponseDto register(@Valid @RequestBody UserRegistrationDto userRegistrationDto) {
         User user = authenticationService.register(userMapper.mapToEntity(userRegistrationDto));
         return userMapper.mapToDto(user);
     }
 
     @Operation(summary = "Data for login", description = "Data for login")
     @PostMapping("/login")
-    public ResponseEntity<Object> login(@RequestBody UserLoginDto userLoginDto)
+    public ResponseEntity<Object> login(@Valid @RequestBody UserLoginDto userLoginDto)
             throws AuthenticationException {
         User user =
                 authenticationService.login(userLoginDto.getEmail(), userLoginDto.getPassword());

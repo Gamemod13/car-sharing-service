@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,7 +27,7 @@ public class RentalController {
     @Operation(summary = "Add a new rental", description =
             "Add a new rental and decrease decrease car inventory by 1")
     @PostMapping
-    public RentalResponseDto add(RentalRequestDto requestDto) {
+    public RentalResponseDto add(@Valid RentalRequestDto requestDto) {
         Rental rental = mapper.mapToEntity(requestDto);
         return mapper.mapToDto(rentalService.add(rental));
     }

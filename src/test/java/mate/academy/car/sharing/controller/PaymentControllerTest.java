@@ -10,6 +10,7 @@ import mate.academy.car.sharing.entity.Payment;
 import mate.academy.car.sharing.entity.User;
 import mate.academy.car.sharing.mapper.PaymentMapper;
 import mate.academy.car.sharing.service.PaymentService;
+import mate.academy.car.sharing.service.TelegramNotificationService;
 import mate.academy.car.sharing.service.UserService;
 import mate.academy.car.sharing.service.stripe.StripePaymentService;
 import org.junit.jupiter.api.Test;
@@ -30,6 +31,8 @@ public class PaymentControllerTest {
     private StripePaymentService stripePaymentService;
     @Mock
     private UserService userService;
+    @Mock
+    private TelegramNotificationService telegramNotificationService;
     @InjectMocks
     private PaymentController paymentController;
 

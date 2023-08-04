@@ -3,7 +3,6 @@ package mate.academy.car.sharing.service.impl;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
-
 import lombok.RequiredArgsConstructor;
 import mate.academy.car.sharing.entity.Car;
 import mate.academy.car.sharing.entity.Rental;
@@ -11,6 +10,7 @@ import mate.academy.car.sharing.entity.User;
 import mate.academy.car.sharing.repository.RentalRepository;
 import mate.academy.car.sharing.service.CarService;
 import mate.academy.car.sharing.service.RentalService;
+import mate.academy.car.sharing.service.TelegramNotificationService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class RentalServiceImpl implements RentalService {
     private final RentalRepository rentalRepository;
     private final CarService carService;
+    private final TelegramNotificationService telegramNotificationService;
 
     @Override
     @Transactional
@@ -28,6 +29,8 @@ public class RentalServiceImpl implements RentalService {
         rental.setCar(car);
         rental.setUser(user);
         rental.setRentalDate(LocalDateTime.now());
+        telegramNotificationService.sendMessageToAdminChat(
+                newRentalGeneratedMessage(rental));
         return rentalRepository.save(rental);
     }
 
@@ -50,7 +53,6 @@ public class RentalServiceImpl implements RentalService {
 
     @Override
     public Rental update(Rental rental) {
-        //TODO:Check/Update
         return rentalRepository.save(rental);
     }
 
@@ -65,11 +67,9 @@ public class RentalServiceImpl implements RentalService {
 
     @Override
     public List<Rental> getByUserAndStatus(Long userId, Boolean isActive) {
-        if (isActive) {
-            return rentalRepository.findByUserIdAndActualReturnDateNull(userId);
-        } else {
-            return rentalRepository.findByUserIdAndActualReturnDateNotNull(userId);
-        }
+        return (isActive)
+                ? rentalRepository.findByUserIdAndActualReturnDateNull(userId)
+                : rentalRepository.findByUserIdAndActualReturnDateNotNull(userId);
     }
 
     @Override
@@ -82,5 +82,12 @@ public class RentalServiceImpl implements RentalService {
             carService.increaseInventory(car);
         }
         return update(rental);
+    }
+
+    private static String newRentalGeneratedMessage(Rental rental) {
+        return "A new one Car: " + rental.getCar().getModel() + " " + rental.getCar().getBrand()
+                + " was rented by User: " + rental.getUser().getFirstName() + " "
+                + rental.getUser().getLastName() + " from " + rental.getRentalDate()
+                + " to " + rental.getReturnDate() + System.lineSeparator();
     }
 }
