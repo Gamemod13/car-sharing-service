@@ -5,12 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import mate.academy.car.sharing.entity.Car;
+import mate.academy.car.sharing.entity.User;
 import mate.academy.car.sharing.entity.Rental;
 import mate.academy.car.sharing.repository.RentalRepository;
 import mate.academy.car.sharing.service.CarService;
+import mate.academy.car.sharing.service.TelegramNotificationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -23,6 +27,8 @@ class RentalServiceImplTest {
     private RentalRepository rentalRepository;
     @Mock
     private CarService carService;
+    @Mock
+    private TelegramNotificationService telegramNotificationService;
 
     @InjectMocks
     private RentalServiceImpl rentalService;
@@ -36,6 +42,15 @@ class RentalServiceImplTest {
     void addRentalTest() {
         Rental rental = new Rental();
         rental.setId(1L);
+        User user = new User();
+        user.setId(1L);
+        rental.setUser(user);
+        Car car = new Car();
+        car.setId(1L);
+        car.setBrand("Toyota");
+        car.setModel("Corolla");
+        rental.setCar(car);
+        when(carService.decreaseInventory(car)).thenReturn(car);
         when(rentalRepository.save(rental)).thenReturn(rental);
         Rental addedRental = rentalService.add(rental);
         assertNotNull(addedRental);

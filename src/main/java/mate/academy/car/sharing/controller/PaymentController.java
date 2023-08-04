@@ -7,8 +7,9 @@ import mate.academy.car.sharing.entity.Payment;
 import mate.academy.car.sharing.entity.User;
 import mate.academy.car.sharing.mapper.PaymentMapper;
 import mate.academy.car.sharing.service.PaymentService;
-import mate.academy.car.sharing.service.stripe.StripePaymentService;
+import mate.academy.car.sharing.service.TelegramNotificationService;
 import mate.academy.car.sharing.service.UserService;
+import mate.academy.car.sharing.service.stripe.StripePaymentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +28,7 @@ public class PaymentController {
     private final UserService userService;
     private final StripePaymentService stripePaymentService;
     private final PaymentMapper paymentMapper;
+    private final TelegramNotificationService telegramNotificationService;
 
     @GetMapping
     public PaymentResponseDto getByUserId(@RequestParam Long userId) {
@@ -46,11 +48,17 @@ public class PaymentController {
     public ResponseEntity<String> handleSuccessPayment(
             @RequestParam("session_id") String sessionId) {
         stripePaymentService.handleSuccessPayment(sessionId);
+        telegramNotificationService.sendMessageToAdminChat(
+                successfulPaymentMessage(sessionId));
         return ResponseEntity.ok("Payment successful. Thank you!");
     }
 
     @GetMapping("/cancel")
     public ResponseEntity<String> handleCancelPayment() {
         return ResponseEntity.ok("Payment canceled. Please try again later.");
+    }
+
+    private static String successfulPaymentMessage(String sessionId) {
+        return "Success payment wits session_id: " + sessionId + " was completed";
     }
 }
