@@ -22,7 +22,7 @@ public abstract class RentalMapper {
     public abstract Rental mapToEntity(RentalRequestDto requestDto);
 
     @Mapping(source = "car", target = "carId")
-    @Mapping(target = "userId", expression = "java(rental.getUser())")
+    @Mapping(source = "user", target = "userId")
     public abstract RentalResponseDto mapToDto(Rental rental);
 
     @Named("getCarById")
@@ -31,11 +31,15 @@ public abstract class RentalMapper {
     }
 
     @Named("getUserById")
-    protected User getUserById(User userId) {
-        return userId;
+    protected User getUserById(Long userId) {
+        return userService.getById(userId);
     }
 
     protected Long mapCarToId(Car car) {
         return car.getId();
+    }
+
+    protected Long mapUserToId(User user) {
+        return user.getId();
     }
 }

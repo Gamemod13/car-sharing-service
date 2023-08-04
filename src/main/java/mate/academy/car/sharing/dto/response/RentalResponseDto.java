@@ -2,7 +2,6 @@ package mate.academy.car.sharing.dto.response;
 
 import java.time.LocalDateTime;
 import lombok.Data;
-import mate.academy.car.sharing.entity.User;
 
 @Data
 public class RentalResponseDto {
@@ -11,5 +10,5 @@ public class RentalResponseDto {
     private LocalDateTime returnDate;
     private LocalDateTime actualReturnDate;
     private Long carId;
-    private User userId;
+    private Long userId;
 }
