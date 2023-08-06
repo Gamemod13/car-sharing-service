@@ -9,9 +9,11 @@ import mate.academy.car.sharing.service.RentalService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Mapper(config = MapperConfig.class)
 public abstract class PaymentMapper {
+    @Autowired
     private RentalService rentalService;
 
     @Mapping(target = "id", ignore = true)

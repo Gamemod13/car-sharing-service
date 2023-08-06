@@ -1,4 +1,3 @@
---liquibase formatted sql
 CREATE TABLE IF NOT EXISTS `payments`  (
                          `id` BIGINT(0) UNSIGNED NOT NULL AUTO_INCREMENT,
                          `status` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
