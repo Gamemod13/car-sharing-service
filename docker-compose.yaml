@@ -25,8 +25,8 @@ services:
            "spring.datasource.username" : "$MYSQLDB_USER",
            "spring.datasource.password" : "$MYSQLDB_ROOT_PASSWORD",
            "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5Dialect",
-           "spring.jpa.hibernate.ddl-auto" : "create-drop",
-           "telegram.bot.username" : "$TELEGRAM_BOT_USERNAME"
+           "spring.jpa.hibernate.ddl-auto" : "validate",
+           "telegram.bot.username" : "$TELEGRAM_BOT_USERNAME",
            "telegram.bot.token" : "$TELEGRAM_BOT_TOKEN"
          }'
         JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
