@@ -14,7 +14,6 @@ public class RentalRequestDto {
     @NotNull(message = "Return date must not be null")
     @Future(message = "Return date must be in the future")
     private LocalDateTime returnDate;
-    private LocalDateTime actualReturnDate;
     @NotNull(message = "Car ID must not be null")
     private Long carId;
     @NotNull(message = "User ID must not be null")
