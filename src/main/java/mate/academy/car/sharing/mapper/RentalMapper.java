@@ -11,10 +11,13 @@ import mate.academy.car.sharing.service.UserService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Mapper(config = MapperConfig.class)
 public abstract class RentalMapper {
+    @Autowired
     private CarService carService;
+    @Autowired
     private UserService userService;
 
     @Mapping(target = "car", source = "requestDto.carId", qualifiedByName = "getCarById")
